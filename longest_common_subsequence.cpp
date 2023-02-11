@@ -4,10 +4,9 @@
 #include<algorithm>
 using namespace std;
 
-int main()
+
+int Longest_Common_Subsequence(string s1,string s2)
 {
-    string s1,s2;
-    cin >> s1 >> s2;
     vector<vector<int>>LCS(s1.size() + 1,vector<int>(s2.size() + 1));
     string  t = "";
     for(int i = 1; i <= s1.size(); i++)
@@ -53,7 +52,14 @@ int main()
     }
 
     reverse(t.begin(),t.end());
+    return LCS[s1.size()][s2.size()];
 
-    cout << LCS[s1.size()][s2.size()] << " " << t;
+}
 
+int main()
+{
+    string s1,s2;
+    cin >> s1 >> s2;
+    int lcs = Longest_Common_Subsequence(s1,s2);
+    cout << lcs << endl;
 }
