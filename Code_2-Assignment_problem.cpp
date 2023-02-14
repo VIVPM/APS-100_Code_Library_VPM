@@ -3,12 +3,20 @@
 #include<algorithm>
 using namespace std;
 
-const int n = 3;
-
-int Assignment(int a[][n])
+int main()
 {
+    int n;
+    cin >> n;
+    int optimal[n][n];
+    for(int i = 0; i < n; i++)
+    {
+        for(int j = 0; j < n; j++)
+        {
+            cin >> optimal[i][j];
+        }
+    }
+
     int f = pow(2,n);
-    //cout << f << endl;
     int dp[f];
     for(int i = 0;i < f;i++){
         if(i == 0){
@@ -28,33 +36,16 @@ int Assignment(int a[][n])
             mask1 >>= 1;
         }
 
-        //cout << x << endl;
         for(int j = 0; j < n; j++)
         {
             if((mask & (1 << j)) == 0)
             {
-                dp[mask | (1 << j)] = min(dp[mask | (1 << j)], (dp[mask] + a[x][j]));
+                dp[mask | (1 << j)] = min(dp[mask | (1 << j)], (dp[mask] + optimal[x][j]));
             }
         }
     }
 
-    return dp[f - 1];
-}
-
-int main()
-{
-    //cin >> n;
-    int optimal[n][n];
-    for(int i = 0; i < n; i++)
-    {
-        for(int j = 0; j < n; j++)
-        {
-            cin >> optimal[i][j];
-        }
-    }
-
-    int dp = Assignment(optimal);
-    cout << dp << endl;
+    cout << dp[f - 1] << endl;
 }
 
 /*
